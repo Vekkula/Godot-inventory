@@ -10,9 +10,9 @@ config_version=3
 
 [application]
 
-config/name="Isometric Game"
-run/main_scene="res://Scenes/dungeon.tscn"
-config/icon="res://icon.png"
+config/name="Least Effort Game: Online?"
+run/main_scene="res://Scenes/menu.tscn"
+config/icon="res://textures/icon.png"
 
 [autoload]
 

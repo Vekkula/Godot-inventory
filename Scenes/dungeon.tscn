@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 radius = 30.0
 
-[node name="dungeon" type="Node2D" index="0"]
+[node name="dungeon" type="Node2D"]
 
 position = Vector2( -1, -1 )
 script = ExtResource( 1 )

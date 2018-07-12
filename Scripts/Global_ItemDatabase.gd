@@ -2,7 +2,7 @@
 
 extends Node
 
-var url_database_item = "res://Database//Database_Items.json"
+var url_database_item = "res://textures//Database_Items.json"
 
 
 func get_item(id):
