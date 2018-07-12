@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/male_arm.png-389970dd916989ba7eb1c5586afd383e.stex"
+
+[deps]
+
+source_file="res://Database/png/Characters/Player male/male_arm.png"
+source_md5="c90ddb89f949bb2c777bae0043f62d2f"
+
+dest_files=[ "res://.import/male_arm.png-389970dd916989ba7eb1c5586afd383e.stex" ]
+dest_md5="1f03eba821f38394f1b368d2704949b8"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

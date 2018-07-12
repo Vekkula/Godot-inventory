@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/male_head.png-a70431ec2b63bf5d06c24b9ae3194abe.stex"
+
+[deps]
+
+source_file="res://Database/png/Characters/Player male/male_head.png"
+source_md5="8c6cbaf70711c71860773c94fa643720"
+
+dest_files=[ "res://.import/male_head.png-a70431ec2b63bf5d06c24b9ae3194abe.stex" ]
+dest_md5="675754b1b2b33dc732e535aaf559690a"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

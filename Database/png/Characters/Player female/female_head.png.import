@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/female_head.png-7f22e475ec7d9f3c7208d31ed16d8450.stex"
+
+[deps]
+
+source_file="res://Database/png/Characters/Player female/female_head.png"
+source_md5="80d4b8ccbeb70d4f14a17cd81feed1f5"
+
+dest_files=[ "res://.import/female_head.png-7f22e475ec7d9f3c7208d31ed16d8450.stex" ]
+dest_md5="d8420e5b8edc77af20e8c527664df91c"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
