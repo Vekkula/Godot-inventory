@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/fish_cooked.png-a9843bb324f00e15d8a4dd06e796185b.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/fish_cooked.png"
+source_md5="7713087abc4920b579ee62562e5a4ff9"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/fish_cooked.png-a9843bb324f00e15d8a4dd06e796185b.stex" ]
+dest_md5="b874e65074d42748e29e5386355b6ccc"
 
 [params]
 

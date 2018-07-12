@@ -86,7 +86,7 @@
 
 	"8": {
 		"name": "Sword",
-		"icon": "res://Database/png/items/sword_iron.png",
+		"icon": "res://Database/items/sword_iron.png",
 		"type": "equipment",
 		"weight": "5",
 		"stackable": false,
@@ -97,7 +97,7 @@
 
 	"9": {
 		"name": "Shovel",
-		"icon": "res://Database/png/items/shovel_iron.png",
+		"icon": "res://Database/items/shovel_iron.png",
 		"type": "equipment",
 		"weight": "5",
 		"stackable": false,
@@ -108,7 +108,7 @@
 
 	"10": {
 		"name": "Diamond Pickaxe",
-		"icon": "res://Database/png/items/pick_diamond.png",
+		"icon": "res://Database/items/pick_diamond.png",
 		"type": "equipment",
 		"weight": "8",
 		"stackable": false,
@@ -130,7 +130,7 @@
 
 	"12": {
 		"name": "Iron axe",
-		"icon": "res://Database/png/items/pick_diamond.png",
+		"icon": "res://Database/items/pick_diamond.png",
 		"type": "equipment",
 		"weight": "6",
 		"stackable": false,

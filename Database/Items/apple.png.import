@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/apple.png-5fdb2ec0aa973107ae45b563c81cf440.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/apple.png"
+source_md5="69ff65ffb268b4b1496a7353e76f71fe"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/apple.png-5fdb2ec0aa973107ae45b563c81cf440.stex" ]
+dest_md5="927209cf4ecd9281f604b0c3639668e5"
 
 [params]
 

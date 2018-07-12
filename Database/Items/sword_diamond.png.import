@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/sword_diamond.png-3be9c716135013666a2979919eb6e1af.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/sword_diamond.png"
+source_md5="94e776417887d81955465350ccf51e51"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/sword_diamond.png-3be9c716135013666a2979919eb6e1af.stex" ]
+dest_md5="2cb3b0f871366865ee3f1b489e95df05"
 
 [params]
 

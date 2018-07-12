@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/axe_gold.png-9e1c059267c3fb53c1dab4cd4f567c86.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/axe_gold.png"
+source_md5="2e0c61843c1080dad287124a22adf6d5"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/axe_gold.png-9e1c059267c3fb53c1dab4cd4f567c86.stex" ]
+dest_md5="ebfd39320f4229cdc83f3f247577aa2b"
 
 [params]
 

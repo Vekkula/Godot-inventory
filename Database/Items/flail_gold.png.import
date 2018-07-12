@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/flail_gold.png-eadd072927ea9021274c2dbc62aa7243.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/flail_gold.png"
+source_md5="155fb2f3ce5f0d649c1b75350cad1aac"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/flail_gold.png-eadd072927ea9021274c2dbc62aa7243.stex" ]
+dest_md5="97deb494d25359599c974d6748a2f7f1"
 
 [params]
 

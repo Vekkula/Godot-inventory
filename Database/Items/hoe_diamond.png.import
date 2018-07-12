@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/hoe_diamond.png-3f769fbb30ed0d1cb6f1e7d3d090e457.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/hoe_diamond.png"
+source_md5="8581b98295eb1979d3f522a5e7fce93a"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/hoe_diamond.png-3f769fbb30ed0d1cb6f1e7d3d090e457.stex" ]
+dest_md5="3485806d5f0a13d9bfd41fad2a186399"
 
 [params]
 

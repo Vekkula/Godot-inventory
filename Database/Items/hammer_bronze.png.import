@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/hammer_bronze.png-f024ddc207e3acb7df873e041823801d.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/hammer_bronze.png"
+source_md5="6a5f1292267df055029fe4323d3ac2cc"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/hammer_bronze.png-f024ddc207e3acb7df873e041823801d.stex" ]
+dest_md5="d7b4b6a95e32e2d8869001873ceba97d"
 
 [params]
 

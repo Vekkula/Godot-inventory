@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/boat.png-75f67f2b6e8c0634ca2d78d92780dbbc.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/boat.png"
+source_md5="9521277a7018b20194e259e6f727dcc1"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/boat.png-75f67f2b6e8c0634ca2d78d92780dbbc.stex" ]
+dest_md5="75b3870c8e5e7d7f11e9e65d1fa78171"
 
 [params]
 

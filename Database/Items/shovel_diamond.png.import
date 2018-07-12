@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex"
+path="res://.import/shovel_diamond.png-a3b442ab1ba3585c054bb41849ca73b2.stex"
 
 [deps]
 
-source_file="res://Godot-inventory/Database/armor.png"
-source_md5="a0abda450d1adb249be551e8fd54c2c9"
+source_file="res://Database/Items/shovel_diamond.png"
+source_md5="429bdd3737e5b8b6780fea3571a9759f"
 
-dest_files=[ "res://.import/armor.png-09fd08a9aea435f8f7b9e3440e68bb40.stex" ]
-dest_md5="6bb2a56cb2c9e1d5c6580ae810a7733c"
+dest_files=[ "res://.import/shovel_diamond.png-a3b442ab1ba3585c054bb41849ca73b2.stex" ]
+dest_md5="a4924838db2791f923723565ebf62d67"
 
 [params]
 
