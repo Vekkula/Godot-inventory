@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://textures/troll_skateboard.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/menu.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/menu.gd" type="Script" id=2]
 [ext_resource path="res://textures/buttons/LEGO_logo.png" type="Texture" id=3]
 [ext_resource path="res://textures/buttons/start_normal.png" type="Texture" id=4]
 [ext_resource path="res://textures/buttons/start_pressed.png" type="Texture" id=5]
@@ -27,7 +27,7 @@ tracks/0/keys = {
 "values": [ Vector2( 220, -400 ), Vector2( 220, 50 ) ]
 }
 
-[node name="Background" type="TextureRect" index="0"]
+[node name="Background" type="TextureRect"]
 
 anchor_left = 0.0
 anchor_top = 0.0

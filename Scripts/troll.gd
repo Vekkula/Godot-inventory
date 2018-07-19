@@ -45,6 +45,8 @@ func _input(event):
 			troll_lock = false
 		elif !troll_lock:
 			troll_lock = true
+	if(event.is_action_pressed("exit_key")):
+		get_tree().quit()
 
 func _on_door_area_body_entered(body):
 	#print("You're at the door")

@@ -26,8 +26,8 @@ onready var gearMenu_RichTextLabel_ItemInfo = get_node("Panel/WindowDialog_GearM
 onready var gearMenu_Button_DropItem = get_node("Panel/WindowDialog_GearMenu/ItemMenu_Button_DropItem")
 onready var gearMenu_Button_Remove = get_node("Panel/WindowDialog_GearMenu/ItemMenu_Button_UseItem")
 
-var activeItemSlot = -1
-var dropItemSlot = -1
+var activeItemSlot = 0#-1
+var dropItemSlot = 0#-1
 
 onready var isDraggingItem = false
 var draggedItemTexture
@@ -37,8 +37,7 @@ var draggedItemSlot = -1
 onready var initial_mousePos = Vector2()
 onready var cursor_insideItemList = false
 onready var cursor_insideGearList = false
-var to_gear
-
+var going_to_gear = false
 
 func _ready():
 	
@@ -59,8 +58,7 @@ func _ready():
 	gearList.set_allow_rmb_select(true)
 	
 	#loads itemlists
-	load_items()
-	load_gear()
+	load_all()
 	
 	set_process(false)
 	set_process_input(true)
@@ -72,15 +70,7 @@ func _process(delta):
 		#mouse position of the scene's rootnode;not the viewport
 		draggedItem.global_position = $".".get_global_mouse_position()
 		
-		if(itemList.get_global_rect().has_point(draggedItem.global_position)):
-			#print("draggedItem is inside itemlist")
-			to_gear = false
-			activeItemSlot = itemList.get_item_at_position(itemList.get_local_mouse_position(),true)
-		elif(gearList.get_global_rect().has_point(draggedItem.global_position)):
-			#print("draggedItem is inside gearlist")
-			to_gear = true
-			activeItemSlot = gearList.get_item_at_position(gearList.get_local_mouse_position(),true)
-
+		get_position()
 
 func _input(event):
 	if (event is InputEventMouseButton):
@@ -88,28 +78,26 @@ func _input(event):
 			mouseButtonReleased = false
 			initial_mousePos = get_viewport().get_mouse_position()
 		if (event.is_action_released("mouse_leftbtn")):
-			move_item(cursor_insideGearList,true)
+			get_position()
+			if draggedItemSlot > -1:
+				print("activeItemSlot:" + str(activeItemSlot) + " draggedItemSlot " +str(draggedItemSlot))
+				move_item(cursor_insideGearList,going_to_gear,true,activeItemSlot,draggedItemSlot)
 			end_drag_item()
-	
 	if (event is InputEventMouseMotion):
-		#itemlist
 		if (cursor_insideItemList):
-			activeItemSlot = itemList.get_item_at_position(itemList.get_local_mouse_position(),true)
+			activeItemSlot = itemList.get_item_at_position(itemList.get_local_mouse_position(),false)
 			if (activeItemSlot >= 0):
-				itemList.select(activeItemSlot, true)
+				#itemList.select(activeItemSlot, true)
 				if (isDraggingItem or mouseButtonReleased):
 					return
 				if (!itemList.is_item_selectable(activeItemSlot)): 
 					end_drag_item()
 				if (initial_mousePos.distance_to(get_viewport().get_mouse_position()) > 0.0): 
 					begin_drag_item(activeItemSlot,false)
-		else:
-			activeItemSlot = -1
-		#gearlist
-		if(cursor_insideGearList):
-			activeItemSlot = gearList.get_item_at_position(gearList.get_local_mouse_position(),true)
+		elif(cursor_insideGearList):
+			activeItemSlot = gearList.get_item_at_position(gearList.get_local_mouse_position(),false)
 			if(activeItemSlot >= 0):
-				gearList.select(activeItemSlot, true)
+				#gearList.select(activeItemSlot, true)
 				if (isDraggingItem or mouseButtonReleased):
 					return
 				if (!gearList.is_item_selectable(activeItemSlot)): 
@@ -118,6 +106,22 @@ func _input(event):
 					begin_drag_item(activeItemSlot,true)
 		else:
 			activeItemSlot = -1
+
+
+func get_position():
+	if(itemList.get_global_rect().has_point(draggedItem.global_position)):
+		activeItemSlot = itemList.get_item_at_position(itemList.get_local_mouse_position(),false)
+		going_to_gear = false
+		print("draggedItem is inside itemlist " + str(activeItemSlot) + str(draggedItemSlot) )
+	elif(gearList.get_global_rect().has_point(draggedItem.global_position)):
+		activeItemSlot = gearList.get_item_at_position(gearList.get_local_mouse_position(),false)
+		going_to_gear = true
+		print("draggedItem is inside gearlist " + str(activeItemSlot) + str(draggedItemSlot) )
+
+
+func load_all():
+	load_items()
+	load_gear()
 
 
 func load_items():
@@ -136,6 +140,8 @@ func load_gear():
 
 func update_slot(slot):
 	var inventoryItem = Global_Player.inventory[String(slot)]
+	if(int(inventoryItem["id"]) < 10):
+		Global_Player.inventory_removeItem(slot) #deletes "gearplaceholders" when they enter the inventory
 	var itemMetaData = Global_ItemDatabase.get_item(inventoryItem["id"])
 	var icon = ResourceLoader.load(itemMetaData["icon"])
 	var amount = int(inventoryItem["amount"])
@@ -153,6 +159,10 @@ func update_slot(slot):
 
 func update_gear_slot(slot):
 	var inventoryItem = Global_Player.gear[String(slot)]
+	if(int(inventoryItem["id"]) == 0):
+		Global_Player.inventory_addGear(slot+1) # replaces the empty slot with a "gearplaceholder"
+		update_gear_slot(slot)
+		return
 	var itemMetaData = Global_ItemDatabase.get_item(inventoryItem["id"])
 	var icon = ResourceLoader.load(itemMetaData["icon"])
 	var amount = int(inventoryItem["amount"])
@@ -162,10 +172,11 @@ func update_gear_slot(slot):
 		amount = " "
 	gearList.set_item_text(slot, String(amount))
 	gearList.set_item_icon(slot, icon)
-	gearList.set_item_selectable(slot, int(inventoryItem["id"]) > 0)
+	gearList.set_item_selectable(slot, int(inventoryItem["id"]) > 10)
 	gearList.set_item_metadata(slot, itemMetaData)
 	gearList.set_item_tooltip(slot, itemMetaData["name"])
 	gearList.set_item_tooltip_enabled(slot, int(inventoryItem["id"]) > 0)
+
 
 #buttons for adding items are for testing purposes
 func _on_Button_AddItem_pressed():
@@ -202,9 +213,8 @@ func _on_ItemList_item_rmb_selected(index, atpos):
 		return
 	
 	dropItemSlot = index
-	
 	var itemData = itemList.get_item_metadata(index)
-	if (int(itemData["id"])) < 1: return
+	if (int(itemData["id"])) < 10: return
 	var strItemInfo = ""
 	
 	itemMenu.set_position($".".get_global_mouse_position() + Vector2(15,15))
@@ -233,16 +243,13 @@ func _on_GearList_item_rmb_selected(index, at_position):
 		return
 	
 	dropItemSlot = index
-	
 	var itemData = gearList.get_item_metadata(index)
-	if (int(itemData["id"])) < 1: return
+	if (int(itemData["id"])) < 10: return
 	var strItemInfo = ""
-	
 	gearMenu.set_position($".".get_global_mouse_position() + Vector2(15,15))
 	
 	gearMenu.set_title(itemData["name"])
 	gearMenu_TextureFrame_Icon.set_texture(gearList.get_item_icon(index))
-	
 	strItemInfo = "Name: [color=#00aedb] " + itemData["name"] + "[/color]\n"
 	strItemInfo = strItemInfo + "Type: [color=#f37735] " + itemData["type"] + "[/color]\n"
 	strItemInfo = strItemInfo + "Weight: [color=#00b159] " + String(itemData["weight"]) + "[/color]\n"
@@ -271,13 +278,14 @@ func _on_ItemMenu_Button_DropItem_pressed():
 
 func _on_ItemMenu_Button_UseItem_pressed():
 	var itemData = itemList.get_item_metadata(dropItemSlot)
-	
+	var itemType = get_item_type(false,dropItemSlot)
 	#check if equipment or consumable
-	print("item type: " + String(itemData["type"]))
-	if String(itemData["type"]) == "equipment":
+	print("item type: " + itemType)
+	if itemType != "consumable" or itemType != "quest":
 		print("EQUIP ITEM")
-		to_gear = true
-		move_item(false, false)
+		activeItemSlot = getSlotByGearType(itemType)
+		print("\n " + str(activeItemSlot))
+		move_item(false,true, false,activeItemSlot,draggedItemSlot)
 	else:
 		#use the item somehow
 		print("USE ITEM")
@@ -294,8 +302,7 @@ func _on_GearMenu_Button_DropGear_pressed():
 
 
 func _on_GearMenu_Button_RemoveGear_pressed():
-	to_gear = false
-	move_item(true, false)
+	move_item(true,false, false,activeItemSlot,draggedItemSlot)
 	gearMenu.hide()
 
 
@@ -314,13 +321,11 @@ func begin_drag_item(index,is_gear):
 	if(!is_gear): 
 		draggedItem.texture = itemList.get_item_icon(index)
 		draggedItem.show()
-
 		itemList.set_item_text(index, " ")
 		itemList.set_item_icon(index, ResourceLoader.load(Global_ItemDatabase.get_item(0)["icon"]))
 	else:
 		draggedItem.texture = gearList.get_item_icon(index)
 		draggedItem.show()
-		
 		gearList.set_item_text(index," ")
 		gearList.set_item_icon(index, ResourceLoader.load(Global_ItemDatabase.get_item(0)["icon"]))
 	
@@ -332,11 +337,8 @@ func begin_drag_item(index,is_gear):
 	elif draggedItem.texture.get_size() > s:
 		var a = draggedItem.texture.get_size()-s 
 		a = a/100
-		print(a)
 		var b = Vector2(1,1)- a
-		print(b)
 		draggedItem.scale = b
-
 	else:
 		draggedItem.scale = Vector2(1,1)
 	
@@ -356,55 +358,105 @@ func end_drag_item():
 	return
 
 
-func move_item(is_gear, dragged):
+func move_item(is_gear,to_gear, dragged, whereToSlot,whereFromSlot):
 	print("\nis this gear? " + str(is_gear))
 	print("is this going to gear  " + str(to_gear))
-	print("dragged to: " + str(activeItemSlot))
+	print("dragged to: " + str(whereToSlot))
+	print("dragged from: " + str(whereFromSlot))
+	print("dragged: " + str(dragged))
 	
 	if dragged:
-		#if dragged and the index is invalid just returns
-		if (draggedItemSlot < 0): 
+		#if dragged and the index is invalid just return
+		if (whereToSlot < 0): 
 			return
-		if (activeItemSlot < 0): 
+		if (whereToSlot < 0): 
 			if(is_gear):
-				update_gear_slot(draggedItemSlot)
+				update_gear_slot(whereFromSlot)
 			elif(!is_gear):
-				update_slot(draggedItemSlot)
+				update_slot(whereFromSlot)
 			return
-	elif !dragged:
-		#the itemslot the dialog was made from. 
-		draggedItemSlot = dropItemSlot
+	elif dragged == false: #equip/unequip
+		whereFromSlot = dropItemSlot #the itemslot the dialog was made from. 
 		if is_gear:
-			activeItemSlot = Global_Player.inventory_getEmptySlot()
-		elif !is_gear:
-			activeItemSlot = Global_Player.gear_getEmptySlot()
+			whereToSlot = Global_Player.inventory_getEmptySlot()
+		#elif !is_gear:
+			#activeItemSlot is updated before using this function
+			#activeItemSlot = Global_Player.gear_getEmptySlot()
 	
-	#if (itemData["stackable"]):
-	#	pass
+	var type
+	var type2
 	
 	#actual moving
 	if(!is_gear and to_gear):
-		print("moved to gear")
-		Global_Player.inventory_itemToGear(draggedItemSlot, activeItemSlot)#
-		update_gear_slot(activeItemSlot)
-		update_slot(draggedItemSlot)
+		#print("moved to gear")
+		type = get_item_type(false,whereFromSlot)
+		type2 = get_item_type(true, whereToSlot)
+		if type == type2: #prevents you from moving the items to slots of different type
+			print("ITEMS ARE EQUAL (" + type + ")  (" + type2 + ")") 
+			Global_Player.inventory_itemToGear(whereFromSlot, whereToSlot)#
+			update_gear_slot(whereToSlot)
+			update_slot(whereFromSlot)
+		else:
+			print("ITEMS ARE NOT EQUAL (" + type + ")  (" + type2 + ")")
 	elif(!is_gear):
-		print("Moved inside inventory")
-		Global_Player.inventory_moveItem(draggedItemSlot, activeItemSlot)
-		update_slot(draggedItemSlot)
-		update_slot(activeItemSlot)
+		#print("Moved inside inventory")
+		Global_Player.inventory_moveItem(whereFromSlot, whereToSlot)
+		update_slot(whereFromSlot)
+		update_slot(whereToSlot)
 	elif(is_gear and !to_gear):
-		print("moved to inventory")
-		Global_Player.inventory_gearToItem(draggedItemSlot, activeItemSlot)#
-		update_slot(activeItemSlot)
-		update_gear_slot(draggedItemSlot)
+		#print("moved to inventory")
+		type = get_item_type(is_gear,whereFromSlot)
+		type2 = get_item_type(false, whereToSlot)
+		if type == type2 or type2 == "empty":
+			print("ITEMS ARE NOT EQUAL (" + type + ")  (" + type2 + ")")
+			Global_Player.inventory_gearToItem(whereFromSlot, whereToSlot)#
+			update_slot(whereToSlot)
+			update_gear_slot(whereFromSlot)
 	elif(is_gear):
-		print("moved inside gear")
-		Global_Player.inventory_moveGear(draggedItemSlot, activeItemSlot)
-		update_gear_slot(draggedItemSlot)
-		update_gear_slot(activeItemSlot)
-		
-	print("dragged from: " + str(draggedItemSlot) + "\n")
+		#print("moved inside gear")
+		type = get_item_type(is_gear,whereFromSlot)
+		type2 = get_item_type(is_gear, whereToSlot)
+		if type == type2:
+			#prevents you from moving the items to slots of different type
+			print("ITEMS ARE EQUAL (" + type + ")  (" + type2 + ")") 
+			Global_Player.inventory_moveGear(whereFromSlot, whereToSlot)
+			update_gear_slot(whereFromSlot)
+			update_gear_slot(whereToSlot)
+		else:
+			print("ITEMS ARE NOT EQUAL (" + type + ")  (" + type2 + ")")
+	#reloads the itemlists, this is kinda ugly but it works
+	load_all()
+	#update attributes to stats
+	send_attributes_to_stats()
+
+
+#returns the type(weapon,boots,etc) as a string
+func get_item_type(gear,typeIndex):
+	var itemData = gearList.get_item_metadata(typeIndex)
+	var itemType = "nulll"
+	if gear:
+		if typeIndex >8:
+			print("oh no the index("+ str(typeIndex) +") is too big for gearlist")
+			return itemType
+	elif !gear:
+		itemData = itemList.get_item_metadata(typeIndex)
+	else:return itemType
+	
+	if(itemData.has("type")):
+		itemType = String(itemData["type"])
+		#print("itemType: " + itemType)
+	else:
+		print("item has no type")
+	return itemType
+
+
+func getSlotByGearType(type):
+	var type2
+	for slot in range(0, Global_Player.gear_maxSlots):
+		type2 = get_item_type(true,slot)
+		if type == type2:
+			return int(slot)
+	print("no matching type for " + str(type))
 
 
 func _on_ItemList_mouse_entered():
@@ -430,3 +482,15 @@ func _on_Button_Exit_pressed():
 	get_tree().call_group("room","inv_exit_pressed")
 
 
+func send_attributes_to_stats():
+	var damage = 0
+	var armor = 0 
+	var data
+	for slot in range(0, Global_Player.gear_maxSlots-1):
+		data = gearList.get_item_metadata(slot)
+		if data.has("damage"):
+			damage += int(data["damage"])
+		if data.has("defence"):
+			armor  += int(data["defence"])
+	
+	global.update_gear_attributes(damage,armor)

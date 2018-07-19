@@ -1,7 +1,9 @@
 extends Node
 
 var current_scene = null
-var my_class
+var damageFromWeapons = 0
+var armorFromArmor = 0
+
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() -1 )
@@ -45,3 +47,8 @@ func _notification(what):
 		Global_Player.save_data()
 		get_tree().quit() # default behavior
 
+func update_gear_attributes(dmgUpdate,armorUpdate):
+	damageFromWeapons = dmgUpdate
+	armorFromArmor = armorUpdate
+	print(damageFromWeapons)
+	print(armorFromArmor)

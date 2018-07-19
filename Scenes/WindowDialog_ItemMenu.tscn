@@ -2,7 +2,6 @@
 
 [ext_resource path="res://textures/icon.png" type="Texture" id=1]
 
-
 [node name="WindowDialog_ItemMenu" type="WindowDialog"]
 
 anchor_left = 0.0

@@ -22,7 +22,6 @@ func load_data():
 		var dict = {"inventory":{}}
 		for slot in range (0, inventory_maxSlots):
 			dict["inventory"][String(slot)] = {"id": "0", "amount": 0}
-
 		Global_DataParser.write_data(url_PlayerData, dict)
 		inventory = dict["inventory"]
 	else:
@@ -33,7 +32,8 @@ func load_gear_data():
 	if (playerGear == null):
 		var dict = {"gear":{}}
 		for slot in range (0, gear_maxSlots):
-			dict["gear"][String(slot)] = {"id": "0", "amount": 0}
+			var placeholder = slot+1
+			dict["gear"][String(slot)] = {"id": str(placeholder), "amount": 0}
 		Global_DataParser.write_data(url_PlayerGear, dict)
 		gear = dict["gear"]
 	else:
@@ -53,6 +53,7 @@ func inventory_getEmptySlot():
 	return -1
 
 
+#not used for anything?
 func gear_getEmptySlot():
 	for slot in range(0, gear_maxSlots):
 		if (gear[String(slot)]["id"] == "0"): 
@@ -110,6 +111,7 @@ func inventory_removeItem(slot):
 	inventory[String(slot)]["amount"] = newAmount
 	return newAmount
 
+
 func inventory_removeGear(slot):
 	var newAmount = gear[String(slot)]["amount"] - 1
 	if (newAmount < 1):
@@ -117,14 +119,6 @@ func inventory_removeGear(slot):
 		return 0
 	gear[String(slot)]["amount"] = newAmount
 	return newAmount
-
-func check_if_same(dict1, dict2):
-
-	if dict1.hash == gear.hash():
-		print("equals\n")
-
-	print(gear["1"])
-	return 
 
 
 func inventory_moveItem(fromSlot, toSlot):
